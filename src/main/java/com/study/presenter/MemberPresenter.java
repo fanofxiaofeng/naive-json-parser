@@ -1,11 +1,9 @@
 package com.study.presenter;
 
 import com.study.model.Member;
-import com.study.util.PrintStreamWrapper;
 
-public class MemberPresenter implements Presenter<Member> {
+public class MemberPresenter extends AbstractPresenter<Member> {
 
-    private final PrintStreamWrapper printStreamWrapper = new PrintStreamWrapper();
     private final int indentLevel;
 
     private final StringConvertor stringConvertor = new StringConvertor();
@@ -13,13 +11,14 @@ public class MemberPresenter implements Presenter<Member> {
 
     public MemberPresenter(int indentLevel) {
         this.indentLevel = indentLevel;
-        elementPresenter = new ElementPresenter(indentLevel + 1);
+        elementPresenter = new ElementPresenter(true, indentLevel);
     }
 
     @Override
     public void present(Member member) {
-        printStreamWrapper.print(stringConvertor.convert(member.string()));
-        printStreamWrapper.print(": ");
+        outputHolder.printWithIndentLevel(stringConvertor.convert(member.string()), indentLevel);
+        outputHolder.print(": ");
         elementPresenter.present(member.element());
+        outputHolder.println();
     }
 }

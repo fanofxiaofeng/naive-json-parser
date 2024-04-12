@@ -1,38 +1,39 @@
 package com.study.presenter;
 
-import com.study.util.PrintStreamWrapper;
-
-public class ObjectPresenter implements Presenter<com.study.model.Object> {
-    private final PrintStreamWrapper printStreamWrapper = new PrintStreamWrapper();
-
-    private final boolean belongsToElement;
+public class ObjectPresenter extends AbstractPresenter<com.study.model.Object> {
+    private final boolean objectValue;
     private final int indentLevel;
 
-    public ObjectPresenter(boolean belongsToElement, int indentLevel) {
-        this.belongsToElement = belongsToElement;
+    private final MembersPresenter membersPresenter;
+
+    public ObjectPresenter(boolean objectValue, int indentLevel) {
+        this.objectValue = objectValue;
         this.indentLevel = indentLevel;
+        this.membersPresenter = new MembersPresenter(indentLevel + 1);
     }
 
     @Override
     public void present(com.study.model.Object object) {
         if (object instanceof com.study.model.Object.CaseOne) {
-            if (belongsToElement) {
-                printStreamWrapper.println("{}");
+            if (objectValue) {
+                outputHolder.print("{}");
             } else {
-                printStreamWrapper.printlnWithIndentLevel("{}", indentLevel);
+                outputHolder.printWithIndentLevel("{}", indentLevel);
             }
             return;
         }
+
         if (object instanceof com.study.model.Object.CaseTwo caseTwo) {
-            if (belongsToElement) {
-                printStreamWrapper.println("{");
+            if (objectValue) {
+                outputHolder.println("{");
             } else {
-                printStreamWrapper.printlnWithIndentLevel("{", indentLevel);
+                outputHolder.printlnWithIndentLevel("{", indentLevel);
             }
-            // todo: for members
-
-
-            printStreamWrapper.printlnWithIndentLevel("}", indentLevel);
+            membersPresenter.present(caseTwo.members());
+            outputHolder.printWithIndentLevel("}", indentLevel);
+            return;
         }
+
+        throw new IllegalArgumentException();
     }
 }
