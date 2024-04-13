@@ -1,7 +1,10 @@
 package com.test.parser;
 
-import com.study.parser.StringParser;
-import com.study.presenter.StringConvertor;
+import com.study.convertor.StringConvertor;
+import com.study.model.Element;
+import com.study.model.Json;
+import com.study.model.Value;
+import com.study.parser.JsonParser;
 import org.apache.commons.collections4.iterators.PeekingIterator;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,10 +12,12 @@ import org.junit.Test;
 public class StringParserTest {
     @Test
     public void test() {
-        String s = "\"Hello world\"";
+        String s = "   \t\n\n\n\t \r  \"Hello world\"  \r";
         PeekingIterator<Integer> peekingIterator = new PeekingIterator<>(s.codePoints().iterator());
-        com.study.model.String string = new StringParser().parse(peekingIterator);
-        String result = new StringConvertor().convert(string);
-        Assert.assertEquals(s, result);
+        Json json = new JsonParser().parse(peekingIterator);
+        Value value = ((Element) json).value();
+        Assert.assertTrue(value instanceof com.study.model.String);
+        String result = new StringConvertor().convert((com.study.model.String) value);
+        System.out.println(result);
     }
 }

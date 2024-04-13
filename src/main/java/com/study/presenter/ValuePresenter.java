@@ -1,5 +1,6 @@
 package com.study.presenter;
 
+import com.study.convertor.*;
 import com.study.model.Value;
 
 public class ValuePresenter extends AbstractPresenter<Value> {
@@ -25,26 +26,44 @@ public class ValuePresenter extends AbstractPresenter<Value> {
         }
         if (value instanceof com.study.model.String string) {
             StringConvertor stringConvertor = new StringConvertor();
-            outputHolder.printWithIndentLevel(stringConvertor.convert(string), indentLevel);
+            if (objectValue) {
+                outputHolder.print(stringConvertor.convert(string));
+            } else {
+                outputHolder.printWithIndentLevel(stringConvertor.convert(string), indentLevel);
+            }
             return;
         }
         if (value instanceof com.study.model.Number number) {
             NumberConvertor numberConvertor = new NumberConvertor();
-            outputHolder.printWithIndentLevel(numberConvertor.convert(number), indentLevel);
+            if (objectValue) {
+                outputHolder.print(numberConvertor.convert(number));
+            } else {
+                outputHolder.printWithIndentLevel(numberConvertor.convert(number), indentLevel);
+            }
             return;
         }
         if (value instanceof Value.CaseTrue caseTrue) {
-            outputHolder.printWithIndentLevel(CaseTrueConvertor.getInstance().convert(caseTrue), indentLevel);
+            if (objectValue) {
+                outputHolder.print(caseTrueConvertor.convert(caseTrue));
+            } else {
+                outputHolder.printWithIndentLevel(caseTrueConvertor.convert(caseTrue), indentLevel);
+            }
             return;
         }
         if (value instanceof Value.CaseFalse caseFalse) {
-            CaseFalseConvertor caseFalseConvertor = new CaseFalseConvertor();
-            outputHolder.printWithIndentLevel(caseFalseConvertor.convert(caseFalse), indentLevel);
+            if (objectValue) {
+                outputHolder.print(caseFalseConvertor.convert(caseFalse));
+            } else {
+                outputHolder.printWithIndentLevel(caseFalseConvertor.convert(caseFalse), indentLevel);
+            }
             return;
         }
         if (value instanceof Value.CaseNull caseNull) {
-            CaseNullConvertor caseNullConvertor = new CaseNullConvertor();
-            outputHolder.printWithIndentLevel(caseNullConvertor.convert(caseNull), indentLevel);
+            if (objectValue) {
+                outputHolder.print(caseNullConvertor.convert(caseNull));
+            } else {
+                outputHolder.printWithIndentLevel(caseNullConvertor.convert(caseNull), indentLevel);
+            }
             return;
         }
 

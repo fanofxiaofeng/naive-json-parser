@@ -2,7 +2,7 @@ package com.test.parser;
 
 import com.study.model.Number;
 import com.study.parser.NumberParser;
-import com.study.presenter.NumberConvertor;
+import com.study.convertor.NumberConvertor;
 import com.study.util.StringUtils;
 import org.apache.commons.collections4.iterators.PeekingIterator;
 import org.junit.Assert;

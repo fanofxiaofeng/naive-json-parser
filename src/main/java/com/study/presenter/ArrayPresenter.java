@@ -12,7 +12,7 @@ public class ArrayPresenter extends AbstractPresenter<com.study.model.Array> {
     public ArrayPresenter(boolean objectValue, int indentLevel) {
         this.objectValue = objectValue;
         this.indentLevel = indentLevel;
-        this.elementsPresenter = new ElementsPresenter(objectValue, indentLevel + 1);
+        this.elementsPresenter = new ElementsPresenter(false, indentLevel + 1);
     }
 
     @Override

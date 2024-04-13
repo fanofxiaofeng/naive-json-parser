@@ -1,4 +1,4 @@
-package com.study.presenter;
+package com.study.convertor;
 
 @FunctionalInterface
 public interface Convertor<T> {

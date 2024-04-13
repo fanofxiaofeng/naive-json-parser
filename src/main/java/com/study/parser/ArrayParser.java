@@ -10,23 +10,21 @@ public class ArrayParser implements Parser<com.study.model.Array> {
 
     @Override
     public Array parse(PeekingIterator<Integer> peekingIterator) {
-        dropExpectedCodePoint(peekingIterator, '[');
+        dropExpectedCodePoint(peekingIterator, com.study.model.Array.LEFT_BRACKET);
         Whitespace whitespace = whitespaceParser.parse(peekingIterator);
-        if (peekingIterator.peek() == ']') {
-            dropExpectedCodePoint(peekingIterator, ']');
-            return new Array.CaseOne('[', whitespace, ']');
+        if (peekingIterator.peek() == Array.RIGHT_BRACKET) {
+            dropExpectedCodePoint(peekingIterator, Array.RIGHT_BRACKET);
+            return new Array.CaseOne(Array.LEFT_BRACKET, whitespace, Array.RIGHT_BRACKET);
         }
+
         Value value = new ValueParser().parse(peekingIterator);
         Whitespace ws2 = whitespaceParser.parse(peekingIterator);
-
         Element element = new Element(whitespace, value, ws2);
-        if (peekingIterator.hasNext() && peekingIterator.peek() == ',') {
-            dropExpectedCodePoint(peekingIterator, ',');
-            ElementsParser elementsParser = new ElementsParser();
-            Elements elements = new Elements.CaseTwo(element, ',', elementsParser.parse(peekingIterator));
-            return new Array.CaseTwo('[', elements, ']');
-        } else {
-            return new Array.CaseTwo('[', new Elements.CaseOne(element), ']');
-        }
+
+        ElementsParser elementsParser = new ElementsParser();
+        Elements elements = elementsParser.parse(element, peekingIterator);
+
+        dropExpectedCodePoint(peekingIterator, Array.RIGHT_BRACKET);
+        return new Array.CaseTwo(Array.LEFT_BRACKET, elements, Array.RIGHT_BRACKET);
     }
 }

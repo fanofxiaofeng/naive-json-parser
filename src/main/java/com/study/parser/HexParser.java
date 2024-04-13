@@ -2,7 +2,6 @@ package com.study.parser;
 
 import com.study.model.Digit;
 import com.study.model.Hex;
-import com.study.model.String;
 import org.apache.commons.collections4.iterators.PeekingIterator;
 
 public class HexParser implements Parser<Hex> {

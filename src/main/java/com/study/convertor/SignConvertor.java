@@ -1,5 +1,6 @@
-package com.study.presenter;
+package com.study.convertor;
 
+import com.study.convertor.Convertor;
 import com.study.model.Sign;
 
 public class SignConvertor implements Convertor<Sign> {

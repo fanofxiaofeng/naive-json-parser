@@ -7,12 +7,10 @@ import org.apache.commons.collections4.iterators.PeekingIterator;
 public class DigitParser implements Parser<Digit> {
     @Override
     public Digit parse(PeekingIterator<Integer> peekingIterator) {
-        if (!peekingIterator.hasNext()) {
-            throw new IllegalArgumentException("peekingIterator is exhausted!");
-        }
+        verifyNotExhaustedYet(peekingIterator);
         int peek = peekingIterator.peek();
         if (peek == '0') {
-            peekingIterator.next();
+            dropExpectedCodePoint(peekingIterator, '0');
             return Zero.getInstance();
         }
 

@@ -1,9 +1,10 @@
-package com.study.presenter;
+package com.study.convertor;
 
 
+import com.study.model.Character;
 import com.study.util.StringUtils;
 
-public class CharacterConvertor implements Convertor<com.study.model.Character> {
+public class CharacterConvertor implements Convertor<Character> {
 
     private final EscapeConvertor escapeConvertor = new EscapeConvertor();
 

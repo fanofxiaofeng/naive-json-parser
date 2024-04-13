@@ -1,5 +1,6 @@
 package com.study.presenter;
 
+import com.study.convertor.StringConvertor;
 import com.study.model.Member;
 
 public class MemberPresenter extends AbstractPresenter<Member> {
@@ -19,6 +20,5 @@ public class MemberPresenter extends AbstractPresenter<Member> {
         outputHolder.printWithIndentLevel(stringConvertor.convert(member.string()), indentLevel);
         outputHolder.print(": ");
         elementPresenter.present(member.element());
-        outputHolder.println();
     }
 }

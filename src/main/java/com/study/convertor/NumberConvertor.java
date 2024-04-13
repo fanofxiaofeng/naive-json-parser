@@ -1,9 +1,9 @@
-package com.study.presenter;
+package com.study.convertor;
 
 import com.study.model.Number;
 import com.study.util.StringUtils;
 
-public class NumberConvertor implements Convertor<com.study.model.Number> {
+public class NumberConvertor implements Convertor<Number> {
 
     private final IntegerConvertor integerConvertor = new IntegerConvertor();
     private final FractionConvertor fractionConvertor = new FractionConvertor();

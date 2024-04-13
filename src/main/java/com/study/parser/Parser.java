@@ -4,6 +4,9 @@ import org.apache.commons.collections4.iterators.PeekingIterator;
 
 @FunctionalInterface
 public interface Parser<T> {
+
+    int COMMA = ',';
+
     T parse(PeekingIterator<Integer> peekingIterator);
 
     default void dropExpectedCodePoint(PeekingIterator<Integer> peekingIterator, int expectedCodePoint) {
@@ -18,9 +21,5 @@ public interface Parser<T> {
         if (!peekingIterator.hasNext()) {
             throw new IllegalArgumentException("peekingIterator is exhausted!");
         }
-    }
-
-    default void dropCodePoint(PeekingIterator<Integer> peekingIterator) {
-        peekingIterator.next();
     }
 }

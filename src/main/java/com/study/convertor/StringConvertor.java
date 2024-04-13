@@ -1,8 +1,9 @@
-package com.study.presenter;
+package com.study.convertor;
 
+import com.study.model.String;
 import com.study.util.StringUtils;
 
-public class StringConvertor implements Convertor<com.study.model.String> {
+public class StringConvertor implements Convertor<String> {
 
     private final CharactersConvertor charactersConvertor = new CharactersConvertor();
 

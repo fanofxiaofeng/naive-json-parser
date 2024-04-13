@@ -1,12 +1,16 @@
-package com.study.presenter;
+package com.study.convertor;
 
 
+import com.study.model.Digit;
+import com.study.model.Integer;
+import com.study.model.OneNine;
 import com.study.util.StringUtils;
 
-public class IntegerConvertor implements Convertor<com.study.model.Integer> {
+public class IntegerConvertor implements Convertor<Integer> {
 
-    private final DigitConvertor digitConvertor = new DigitConvertor();
-    private final OneNineConverter oneNineConverter = new OneNineConverter();
+    private final Convertor<Digit> digitConvertor = Digit::toString;
+    private final Convertor<OneNine> oneNineConverter = OneNine::toString;
+
     private final DigitsConvertor digitsConvertor = new DigitsConvertor();
 
     @Override

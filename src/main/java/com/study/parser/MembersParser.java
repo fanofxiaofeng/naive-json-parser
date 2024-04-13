@@ -12,21 +12,19 @@ public class MembersParser implements Parser<Members> {
     @Override
     public Members parse(PeekingIterator<Integer> peekingIterator) {
         Member member = memberParser.parse(peekingIterator);
-        if (peekingIterator.hasNext() && peekingIterator.peek() == ',') {
-            dropExpectedCodePoint(peekingIterator, ',');
-            return new Members.CaseTwo(member, ',', parse(peekingIterator));
-        } else {
-            return new Members.CaseOne(member);
+        if (peekingIterator.hasNext() && peekingIterator.peek() == COMMA) {
+            dropExpectedCodePoint(peekingIterator, COMMA);
+            return new Members.CaseTwo(member, COMMA, parse(peekingIterator));
         }
+        return new Members.CaseOne(member);
     }
 
     public Members parse(Whitespace whitespace, PeekingIterator<Integer> peekingIterator) {
         Member member = memberParser.parse(whitespace, peekingIterator);
-        if (peekingIterator.hasNext() && peekingIterator.peek() == ',') {
-            dropExpectedCodePoint(peekingIterator, ',');
-            return new Members.CaseTwo(member, ',', parse(peekingIterator));
-        } else {
-            return new Members.CaseOne(member);
+        if (peekingIterator.hasNext() && peekingIterator.peek() == COMMA) {
+            dropExpectedCodePoint(peekingIterator, COMMA);
+            return new Members.CaseTwo(member, COMMA, parse(peekingIterator));
         }
+        return new Members.CaseOne(member);
     }
 }

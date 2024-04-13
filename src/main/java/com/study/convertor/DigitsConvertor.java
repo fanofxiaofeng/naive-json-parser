@@ -1,11 +1,12 @@
-package com.study.presenter;
+package com.study.convertor;
 
+import com.study.model.Digit;
 import com.study.model.Digits;
 import com.study.util.StringUtils;
 
 public class DigitsConvertor implements Convertor<Digits> {
 
-    private final DigitConvertor digitConvertor = new DigitConvertor();
+    private final Convertor<Digit> digitConvertor = Digit::toString;
 
     @Override
     public String convert(Digits digits) {

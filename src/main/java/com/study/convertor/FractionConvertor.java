@@ -1,4 +1,4 @@
-package com.study.presenter;
+package com.study.convertor;
 
 import com.study.model.Fraction;
 import com.study.util.StringUtils;

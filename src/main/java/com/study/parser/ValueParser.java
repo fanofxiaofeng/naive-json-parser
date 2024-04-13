@@ -1,5 +1,7 @@
 package com.study.parser;
 
+import com.study.model.Array;
+import com.study.model.Object;
 import com.study.model.Value;
 import org.apache.commons.collections4.iterators.PeekingIterator;
 
@@ -8,15 +10,17 @@ public class ValueParser implements Parser<Value> {
     public Value parse(PeekingIterator<Integer> peekingIterator) {
         int peek = peekingIterator.peek();
 
-        return switch (peek) {
-            case '{' -> new ObjectParser().parse(peekingIterator);
-            case '[' -> new ArrayParser().parse(peekingIterator);
-            case '"' -> new StringParser().parse(peekingIterator);
-            case 't' -> new CaseTrueParser().parse(peekingIterator);
-            case 'f' -> new CaseFalseParser().parse(peekingIterator);
-            case 'n' -> new CaseNullParser().parse(peekingIterator);
-            default -> new NumberParser().parse(peekingIterator);
+        Parser<? extends Value> parser = switch (peek) {
+            case Object.LEFT_BRACE -> new ObjectParser();
+            case Array.LEFT_BRACKET -> new ArrayParser();
+            case '"' -> new StringParser();
+            case 't' -> new CaseTrueParser();
+            case 'f' -> new CaseFalseParser();
+            case 'n' -> new CaseNullParser();
+            case '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' -> new NumberParser();
+            default -> throw new IllegalArgumentException();
         };
 
+        return parser.parse(peekingIterator);
     }
 }

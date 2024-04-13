@@ -11,10 +11,13 @@ public class ElementsParser implements Parser<Elements> {
     @Override
     public Elements parse(PeekingIterator<Integer> peekingIterator) {
         Element element = elementParser.parse(peekingIterator);
+        return parse(element, peekingIterator);
+    }
 
-        if (peekingIterator.hasNext() && peekingIterator.peek() == ',') {
-            dropExpectedCodePoint(peekingIterator, ',');
-            return new Elements.CaseTwo(element, ',', parse(peekingIterator));
+    public Elements parse(Element element, PeekingIterator<Integer> peekingIterator) {
+        if (peekingIterator.hasNext() && peekingIterator.peek() == COMMA) {
+            dropExpectedCodePoint(peekingIterator, COMMA);
+            return new Elements.CaseTwo(element, COMMA, parse(peekingIterator));
         }
 
         return new Elements.CaseOne(element);
