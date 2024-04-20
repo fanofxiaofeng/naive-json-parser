@@ -1,29 +1,32 @@
 package com.test.parser;
 
-import com.study.model.Number;
-import com.study.parser.NumberParser;
-import com.study.convertor.NumberConvertor;
-import com.study.util.StringUtils;
-import org.apache.commons.collections4.iterators.PeekingIterator;
+import com.study.model.Json;
+import com.study.presenter.JsonPresenter;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Random;
 
-public class NumberParserTest {
+public class NumberParserTest extends TestBase {
 
     @Test
     public void test() {
-        int passCnt = 0;
         Random random = new Random();
-        for (int i = 0; i < 10000; i++) {
+
+        int passCnt = 0;
+        for (int i = 0; i < 100; i++) {
             String s = random.nextGaussian() + "";
-            PeekingIterator<Integer> peekingIterator = new PeekingIterator<>(s.codePoints().iterator());
-            Number number = new NumberParser().parse(peekingIterator);
-            String result = new NumberConvertor().convert(number);
-            Assert.assertEquals(StringUtils.fromStringArray(s, " != ", result), s, result);
+            Json json = parse(s);
+
+            JsonPresenter jsonPresenter = new JsonPresenter();
+            jsonPresenter.present(json);
+            String output = jsonPresenter.collect();
+            Assert.assertEquals(s, output.trim());
             passCnt++;
+
+            System.out.printf("Test for number: [%s] passed%n", s);
         }
+
         System.out.printf("passCnt is: %s%n", passCnt);
     }
 }

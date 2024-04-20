@@ -16,6 +16,10 @@ public class JsonParserTest {
 //        String s = "[   {\"Message\": \"Hello, world\", \"Some special numbers\": [4.2E1, 23E0, 3.1415926 ], \"Today is Saturday\" : true, \"Needs to work\": false, \"Test for null\": null}]";
         PeekingIterator<Integer> iterator = new PeekingIterator<>(s.codePoints().iterator());
         Json json = new JsonParser().parse(iterator);
-        new JsonPresenter().present(json);
+        JsonPresenter jsonPresenter = new JsonPresenter();
+        jsonPresenter.present(json);
+        String output = jsonPresenter.collect();
+        System.out.println(output);
+//        new JsonPresenter().present(json);
     }
 }

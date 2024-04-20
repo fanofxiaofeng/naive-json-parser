@@ -1,21 +1,32 @@
 package com.test.parser;
 
-import com.study.model.Digits;
-import com.study.parser.DigitsParser;
-import com.study.convertor.DigitsConvertor;
-import org.apache.commons.collections4.iterators.PeekingIterator;
+import com.study.model.Json;
+import com.study.presenter.JsonPresenter;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class DigitsParserTest {
+public class DigitsParserTest extends TestBase {
     @Test
-    public void test() {
-        String s = "1002345679832985928609480890849038952429089023893809284932849023840239043";
-//        String s = "1a";
-        PeekingIterator<Integer> iterator = new PeekingIterator<>(s.codePoints().iterator());
-        Digits digits = new DigitsParser().parse(iterator);
-        String result = new DigitsConvertor().convert(digits);
-        System.out.println(result);
-        Assert.assertEquals(s, result);
+    public void testForOneDigitCase() {
+        for (int i = 0; i < 10; i++) {
+            String s = i + "";
+            Json json = parse(s);
+            JsonPresenter jsonPresenter = new JsonPresenter();
+            jsonPresenter.present(json);
+            String output = jsonPresenter.collect();
+            Assert.assertEquals(s, output.trim());
+        }
+    }
+
+    @Test
+    public void testForTwoDigitsCase() {
+        for (int i = 10; i < 100; i++) {
+            String s = i + "";
+            Json json = parse(s);
+            JsonPresenter jsonPresenter = new JsonPresenter();
+            jsonPresenter.present(json);
+            String output = jsonPresenter.collect();
+            Assert.assertEquals(s, output.trim());
+        }
     }
 }

@@ -1,15 +1,17 @@
 package com.study.presenter;
 
 import com.study.model.Members;
+import com.study.util.OutputHolder;
 
 public class MembersPresenter extends AbstractPresenter<Members> {
     private final int indentLevel;
 
     private final MemberPresenter memberPresenter;
 
-    public MembersPresenter(int indentLevel) {
+    public MembersPresenter(OutputHolder outputHolder, int indentLevel) {
+        super(outputHolder);
         this.indentLevel = indentLevel;
-        this.memberPresenter = new MemberPresenter(indentLevel);
+        this.memberPresenter = new MemberPresenter(outputHolder, indentLevel);
     }
 
     @Override

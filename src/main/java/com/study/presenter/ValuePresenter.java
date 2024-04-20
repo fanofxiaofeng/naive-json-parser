@@ -2,12 +2,14 @@ package com.study.presenter;
 
 import com.study.convertor.*;
 import com.study.model.Value;
+import com.study.util.OutputHolder;
 
 public class ValuePresenter extends AbstractPresenter<Value> {
     private final boolean objectValue;
     private final int indentLevel;
 
-    public ValuePresenter(boolean objectValue, int indentLevel) {
+    public ValuePresenter(OutputHolder outputHolder, boolean objectValue, int indentLevel) {
+        super(outputHolder);
         this.objectValue = objectValue;
         this.indentLevel = indentLevel;
     }
@@ -15,12 +17,12 @@ public class ValuePresenter extends AbstractPresenter<Value> {
     @Override
     public void present(Value value) {
         if (value instanceof com.study.model.Object object) {
-            ObjectPresenter objectPresenter = new ObjectPresenter(objectValue, indentLevel);
+            ObjectPresenter objectPresenter = new ObjectPresenter(outputHolder, objectValue, indentLevel);
             objectPresenter.present(object);
             return;
         }
         if (value instanceof com.study.model.Array array) {
-            ArrayPresenter arrayPresenter = new ArrayPresenter(objectValue, indentLevel);
+            ArrayPresenter arrayPresenter = new ArrayPresenter(outputHolder, objectValue, indentLevel);
             arrayPresenter.present(array);
             return;
         }

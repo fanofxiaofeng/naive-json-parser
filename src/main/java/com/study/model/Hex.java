@@ -19,15 +19,10 @@ public interface Hex {
         UPPERCASE_F('F'),
 
         LOWERCASE_A('a'),
-
         LOWERCASE_B('b'),
-
         LOWERCASE_C('c'),
-
         LOWERCASE_D('d'),
-
         LOWERCASE_E('e'),
-
         LOWERCASE_F('f'),
         ;
         private final int symbol;
@@ -42,7 +37,7 @@ public interface Hex {
 
         @Override
         public java.lang.String toString() {
-            return StringUtils.fromInt(symbol);
+            return StringUtils.fromCodePoint(symbol);
         }
     }
 }

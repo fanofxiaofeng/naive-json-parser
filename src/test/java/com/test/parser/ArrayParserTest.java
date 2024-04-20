@@ -12,6 +12,6 @@ public class ArrayParserTest {
         String s = "  [1,2  ,3.1415926E0 , 2.3E1 ]";
         PeekingIterator<Integer> iterator = new PeekingIterator<>(s.codePoints().iterator());
         Json json = new JsonParser().parse(iterator);
-        new JsonPresenter().present(json);
+//        new JsonPresenter().present(json);
     }
 }

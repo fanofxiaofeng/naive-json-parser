@@ -1,28 +1,20 @@
 package com.study.parser;
 
-import com.study.builder.WhitespaceBuilder;
 import com.study.model.Whitespace;
 import org.apache.commons.collections4.iterators.PeekingIterator;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class WhitespaceParser implements Parser<Whitespace> {
     @Override
     public Whitespace parse(PeekingIterator<Integer> peekingIterator) {
-        List<Integer> result = new ArrayList<>();
-
-        while (peekingIterator.hasNext()) {
-            int peek = peekingIterator.peek();
-            if (qualified(peek)) {
-                int next = peekingIterator.next();
-                result.add(next);
-                continue;
-            }
-            break;
+        if (!peekingIterator.hasNext()) {
+            return Whitespace.EmptyCase.getInstance();
+        }
+        int peek = peekingIterator.peek();
+        if (!qualified(peek)) {
+            return Whitespace.EmptyCase.getInstance();
         }
 
-        return new WhitespaceBuilder().build(result);
+        return new Whitespace.NormalCase(peekingIterator.next(), parse(peekingIterator));
     }
 
     private boolean qualified(int e) {

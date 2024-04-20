@@ -1,7 +1,6 @@
 package com.test.parser;
 
 import com.study.convertor.StringConvertor;
-import com.study.model.Element;
 import com.study.model.Json;
 import com.study.model.Value;
 import com.study.parser.JsonParser;
@@ -15,7 +14,7 @@ public class StringParserTest {
         String s = "   \t\n\n\n\t \r  \"Hello world\"  \r";
         PeekingIterator<Integer> peekingIterator = new PeekingIterator<>(s.codePoints().iterator());
         Json json = new JsonParser().parse(peekingIterator);
-        Value value = ((Element) json).value();
+        Value value = json.element().value();
         Assert.assertTrue(value instanceof com.study.model.String);
         String result = new StringConvertor().convert((com.study.model.String) value);
         System.out.println(result);

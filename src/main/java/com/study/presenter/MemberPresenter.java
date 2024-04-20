@@ -2,6 +2,7 @@ package com.study.presenter;
 
 import com.study.convertor.StringConvertor;
 import com.study.model.Member;
+import com.study.util.OutputHolder;
 
 public class MemberPresenter extends AbstractPresenter<Member> {
 
@@ -10,9 +11,10 @@ public class MemberPresenter extends AbstractPresenter<Member> {
     private final StringConvertor stringConvertor = new StringConvertor();
     private final ElementPresenter elementPresenter;
 
-    public MemberPresenter(int indentLevel) {
+    public MemberPresenter(OutputHolder outputHolder, int indentLevel) {
+        super(outputHolder);
         this.indentLevel = indentLevel;
-        elementPresenter = new ElementPresenter(true, indentLevel);
+        elementPresenter = new ElementPresenter(outputHolder,true, indentLevel);
     }
 
     @Override

@@ -25,6 +25,6 @@ public enum OneNine implements Digit {
 
     @Override
     public java.lang.String toString() {
-        return StringUtils.fromInt(number);
+        return StringUtils.fromCodePoint(number);
     }
 }

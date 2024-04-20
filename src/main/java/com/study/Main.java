@@ -1,6 +1,7 @@
-package com.study.parser;
+package com.study;
 
 import com.study.model.Json;
+import com.study.parser.JsonParser;
 import com.study.presenter.JsonPresenter;
 import org.apache.commons.collections4.iterators.PeekingIterator;
 
@@ -19,6 +20,8 @@ public class Main {
 
             JsonPresenter jsonPresenter = new JsonPresenter();
             jsonPresenter.present(json);
+            String output = jsonPresenter.collect();
+            System.out.println(output);
         }
     }
 }

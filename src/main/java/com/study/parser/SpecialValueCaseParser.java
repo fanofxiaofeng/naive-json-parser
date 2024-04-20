@@ -14,10 +14,7 @@ public class SpecialValueCaseParser implements Parser<Value> {
 
     @Override
     public Value parse(PeekingIterator<Integer> peekingIterator) {
-        for (char c : name.toCharArray()) {
-            dropExpectedCodePoint(peekingIterator, c);
-        }
-
+        name.codePoints().forEach(codePoint -> dropExpectedCodePoint(peekingIterator, codePoint));
         return valueInstance;
     }
 }

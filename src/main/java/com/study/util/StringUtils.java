@@ -1,7 +1,7 @@
 package com.study.util;
 
 public class StringUtils {
-    public static String fromInt(int codePoint) {
+    public static String fromCodePoint(int codePoint) {
         return new String(new int[]{codePoint}, 0, 1);
     }
 

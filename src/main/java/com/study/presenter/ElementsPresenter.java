@@ -1,6 +1,7 @@
 package com.study.presenter;
 
 import com.study.model.Elements;
+import com.study.util.OutputHolder;
 
 public class ElementsPresenter extends AbstractPresenter<Elements> {
 
@@ -10,10 +11,11 @@ public class ElementsPresenter extends AbstractPresenter<Elements> {
 
     private final ElementPresenter elementPresenter;
 
-    public ElementsPresenter(boolean objectValue, int indentLevel) {
+    public ElementsPresenter(OutputHolder outputHolder, boolean objectValue, int indentLevel) {
+        super(outputHolder);
         this.objectValue = objectValue;
         this.indentLevel = indentLevel;
-        this.elementPresenter = new ElementPresenter(objectValue, indentLevel);
+        this.elementPresenter = new ElementPresenter(outputHolder, objectValue, indentLevel);
     }
 
     @Override

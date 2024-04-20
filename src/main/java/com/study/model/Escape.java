@@ -5,7 +5,6 @@ import com.study.util.StringUtils;
 public interface Escape {
     enum SpecialCase implements Escape {
         QUOTATION_MARK('"'),
-
         REVERSE_SOLIDUS('\\'),
         SOLIDUS('/'),
         BACKSPACE('b'),
@@ -26,7 +25,7 @@ public interface Escape {
 
         @Override
         public java.lang.String toString() {
-            return StringUtils.fromInt(symbol);
+            return StringUtils.fromCodePoint(symbol);
         }
     }
 

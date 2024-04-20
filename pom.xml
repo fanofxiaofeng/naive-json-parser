@@ -50,7 +50,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.study.parser.Main</mainClass>
+                            <mainClass>com.study.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
