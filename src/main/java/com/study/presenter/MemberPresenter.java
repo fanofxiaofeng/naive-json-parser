@@ -2,7 +2,7 @@ package com.study.presenter;
 
 import com.study.convertor.StringConvertor;
 import com.study.model.Member;
-import com.study.util.OutputHolder;
+import com.study.util.ResultHolder;
 
 public class MemberPresenter extends AbstractPresenter<Member> {
 
@@ -11,16 +11,16 @@ public class MemberPresenter extends AbstractPresenter<Member> {
     private final StringConvertor stringConvertor = new StringConvertor();
     private final ElementPresenter elementPresenter;
 
-    public MemberPresenter(OutputHolder outputHolder, int indentLevel) {
-        super(outputHolder);
+    public MemberPresenter(ResultHolder resultHolder, int indentLevel) {
+        super(resultHolder);
         this.indentLevel = indentLevel;
-        elementPresenter = new ElementPresenter(outputHolder,true, indentLevel);
+        elementPresenter = new ElementPresenter(resultHolder,true, indentLevel);
     }
 
     @Override
     public void present(Member member) {
-        outputHolder.printWithIndentLevel(stringConvertor.convert(member.string()), indentLevel);
-        outputHolder.print(": ");
+        resultHolder.printWithIndentLevel(stringConvertor.convert(member.string()), indentLevel);
+        resultHolder.print(": ");
         elementPresenter.present(member.element());
     }
 }

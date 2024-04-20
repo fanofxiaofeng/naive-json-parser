@@ -1,9 +1,13 @@
 package com.study.util;
 
-public class OutputHolder {
+public class ResultHolder {
     private final StringBuilder stringBuilder = new StringBuilder();
 
-    private static final int INDENT_WIDTH_FOR_EACH_LEVEL = 4;
+    private final int indentWidthForEachLevel;
+
+    public ResultHolder(int indentWidthForEachLevel) {
+        this.indentWidthForEachLevel = indentWidthForEachLevel;
+    }
 
     public void print(String content) {
         stringBuilder.append(content);
@@ -18,7 +22,7 @@ public class OutputHolder {
     }
 
     public void printWithIndentLevel(String content, int indentLevel) {
-        stringBuilder.append(" ".repeat(INDENT_WIDTH_FOR_EACH_LEVEL).repeat(indentLevel));
+        stringBuilder.append(" ".repeat(indentWidthForEachLevel).repeat(indentLevel));
         stringBuilder.append(content);
     }
 

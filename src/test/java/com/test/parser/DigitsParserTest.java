@@ -1,7 +1,7 @@
 package com.test.parser;
 
 import com.study.model.Json;
-import com.study.presenter.JsonPresenter;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,10 +11,8 @@ public class DigitsParserTest extends TestBase {
         for (int i = 0; i < 10; i++) {
             String s = i + "";
             Json json = parse(s);
-            JsonPresenter jsonPresenter = new JsonPresenter();
-            jsonPresenter.present(json);
-            String output = jsonPresenter.collect();
-            Assert.assertEquals(s, output.trim());
+            String result = present(json);
+            Assert.assertEquals(s, result.trim());
         }
     }
 
@@ -23,10 +21,23 @@ public class DigitsParserTest extends TestBase {
         for (int i = 10; i < 100; i++) {
             String s = i + "";
             Json json = parse(s);
-            JsonPresenter jsonPresenter = new JsonPresenter();
-            jsonPresenter.present(json);
-            String output = jsonPresenter.collect();
-            Assert.assertEquals(s, output.trim());
+            String result = present(json);
+            Assert.assertEquals(s, result.trim());
+        }
+    }
+
+    @Test
+    public void testForGeneralCase() {
+        for (int i = 0; i < 100; i++) {
+            String randomNumber = RandomStringUtils.randomNumeric(1, 100);
+            if (randomNumber.startsWith("0") && !randomNumber.equals("0")) {
+                continue;
+            }
+
+            Json json = parse(randomNumber);
+            String result = present(json);
+            Assert.assertEquals(randomNumber, result.trim());
+            System.out.printf("Test passed for number: [%s]%n", randomNumber);
         }
     }
 }

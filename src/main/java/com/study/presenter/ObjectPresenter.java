@@ -1,7 +1,7 @@
 package com.study.presenter;
 
 import com.study.model.Object;
-import com.study.util.OutputHolder;
+import com.study.util.ResultHolder;
 
 public class ObjectPresenter extends AbstractPresenter<com.study.model.Object> {
     private final boolean objectValue;
@@ -9,11 +9,11 @@ public class ObjectPresenter extends AbstractPresenter<com.study.model.Object> {
 
     private final MembersPresenter membersPresenter;
 
-    public ObjectPresenter(OutputHolder outputHolder, boolean objectValue, int indentLevel) {
-        super(outputHolder);
+    public ObjectPresenter(ResultHolder resultHolder, boolean objectValue, int indentLevel) {
+        super(resultHolder);
         this.objectValue = objectValue;
         this.indentLevel = indentLevel;
-        this.membersPresenter = new MembersPresenter(outputHolder, indentLevel + 1);
+        this.membersPresenter = new MembersPresenter(resultHolder, indentLevel + 1);
     }
 
     @Override
@@ -33,19 +33,19 @@ public class ObjectPresenter extends AbstractPresenter<com.study.model.Object> {
 
     private void presentCaseOne() {
         if (objectValue) {
-            outputHolder.print("{}");
+            resultHolder.print("{}");
         } else {
-            outputHolder.printWithIndentLevel("{}", indentLevel);
+            resultHolder.printWithIndentLevel("{}", indentLevel);
         }
     }
 
     private void presentCaseTwo(Object.CaseTwo caseTwo) {
         if (objectValue) {
-            outputHolder.println("{");
+            resultHolder.println("{");
         } else {
-            outputHolder.printlnWithIndentLevel("{", indentLevel);
+            resultHolder.printlnWithIndentLevel("{", indentLevel);
         }
         membersPresenter.present(caseTwo.members());
-        outputHolder.printWithIndentLevel("}", indentLevel);
+        resultHolder.printWithIndentLevel("}", indentLevel);
     }
 }

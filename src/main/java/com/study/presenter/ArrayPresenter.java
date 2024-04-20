@@ -2,15 +2,15 @@ package com.study.presenter;
 
 import com.study.model.Array;
 import com.study.model.Elements;
-import com.study.util.OutputHolder;
+import com.study.util.ResultHolder;
 
 public class ArrayPresenter extends AbstractPresenter<com.study.model.Array> {
 
     private final boolean objectValue;
     private final int indentLevel;
 
-    public ArrayPresenter(OutputHolder outputHolder, boolean objectValue, int indentLevel) {
-        super(outputHolder);
+    public ArrayPresenter(ResultHolder resultHolder, boolean objectValue, int indentLevel) {
+        super(resultHolder);
         this.objectValue = objectValue;
         this.indentLevel = indentLevel;
     }
@@ -32,23 +32,23 @@ public class ArrayPresenter extends AbstractPresenter<com.study.model.Array> {
 
     private void presentCaseOne() {
         if (objectValue) {
-            outputHolder.print("[]");
+            resultHolder.print("[]");
         } else {
-            outputHolder.printWithIndentLevel("[]", indentLevel);
+            resultHolder.printWithIndentLevel("[]", indentLevel);
         }
     }
 
     private void presentCaseTwo(Array.CaseTwo caseTwo) {
         if (objectValue) {
-            outputHolder.println("[");
+            resultHolder.println("[");
         } else {
-            outputHolder.printlnWithIndentLevel("[", indentLevel);
+            resultHolder.printlnWithIndentLevel("[", indentLevel);
         }
 
-        Presenter<Elements> elementsPresenter = new ElementsPresenter(outputHolder, false, indentLevel + 1);
+        Presenter<Elements> elementsPresenter = new ElementsPresenter(resultHolder, false, indentLevel + 1);
         elementsPresenter.present(caseTwo.elements());
 
-        outputHolder.println();
-        outputHolder.printWithIndentLevel("]", indentLevel);
+        resultHolder.println();
+        resultHolder.printWithIndentLevel("]", indentLevel);
     }
 }

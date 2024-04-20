@@ -2,7 +2,7 @@ package com.study;
 
 import com.study.model.Json;
 import com.study.parser.JsonParser;
-import com.study.presenter.JsonPresenter;
+import com.study.presenter.PresenterFacade;
 import org.apache.commons.collections4.iterators.PeekingIterator;
 
 import java.io.IOException;
@@ -18,10 +18,9 @@ public class Main {
             JsonParser jsonParser = new JsonParser();
             Json json = jsonParser.parse(new PeekingIterator<>(raw.codePoints().iterator()));
 
-            JsonPresenter jsonPresenter = new JsonPresenter();
-            jsonPresenter.present(json);
-            String output = jsonPresenter.collect();
-            System.out.println(output);
+            PresenterFacade presenterFacade = new PresenterFacade();
+            String result = presenterFacade.convertToString(json);
+            System.out.println(result);
         }
     }
 }

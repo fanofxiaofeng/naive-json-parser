@@ -12,6 +12,7 @@ public class CharactersParser implements Parser<com.study.model.Characters> {
         }
 
         int peek = peekingIterator.peek();
+//        System.out.printf("next cp is: %s%n", StringUtils.fromCodePoint(peek));
         if (qualified(peek)) {
             CharacterParser characterParser = new CharacterParser();
             return new Characters.CaseTwo(characterParser.parse(peekingIterator), parse(peekingIterator));

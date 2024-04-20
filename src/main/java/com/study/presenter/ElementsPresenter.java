@@ -1,7 +1,7 @@
 package com.study.presenter;
 
 import com.study.model.Elements;
-import com.study.util.OutputHolder;
+import com.study.util.ResultHolder;
 
 public class ElementsPresenter extends AbstractPresenter<Elements> {
 
@@ -11,11 +11,11 @@ public class ElementsPresenter extends AbstractPresenter<Elements> {
 
     private final ElementPresenter elementPresenter;
 
-    public ElementsPresenter(OutputHolder outputHolder, boolean objectValue, int indentLevel) {
-        super(outputHolder);
+    public ElementsPresenter(ResultHolder resultHolder, boolean objectValue, int indentLevel) {
+        super(resultHolder);
         this.objectValue = objectValue;
         this.indentLevel = indentLevel;
-        this.elementPresenter = new ElementPresenter(outputHolder, objectValue, indentLevel);
+        this.elementPresenter = new ElementPresenter(resultHolder, objectValue, indentLevel);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ElementsPresenter extends AbstractPresenter<Elements> {
 
         if (elements instanceof Elements.CaseTwo caseTwo) {
             elementPresenter.present(caseTwo.element());
-            outputHolder.println(",");
+            resultHolder.println(",");
             present(caseTwo.elements());
             return;
         }

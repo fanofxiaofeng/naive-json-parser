@@ -2,12 +2,13 @@ package com.test.parser;
 
 import com.study.model.Json;
 import com.study.parser.JsonParser;
-import com.study.presenter.JsonPresenter;
 import org.apache.commons.collections4.iterators.PeekingIterator;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class SpecialValueCaseParserTest {
+import java.io.IOException;
+
+public class SpecialValueCaseParserTest extends TestBase {
 
     @Test
     public void test() {
@@ -16,11 +17,16 @@ public class SpecialValueCaseParserTest {
             PeekingIterator<Integer> peekingIterator = new PeekingIterator<>(s.codePoints().iterator());
             Json json = new JsonParser().parse(peekingIterator);
 
-            JsonPresenter jsonPresenter = new JsonPresenter();
-            jsonPresenter.present(json);
-            String output = jsonPresenter.collect();
-            Assert.assertEquals(value, output.trim());
+            String result = present(json);
+            Assert.assertEquals(value, result.trim());
             System.out.printf("Test for: case [%s] passed%n", value);
         }
+    }
+
+    @Test
+    public void testWithFile() throws IOException {
+        testWithFile("cases/simple/true.json");
+        testWithFile("cases/simple/false.json");
+        testWithFile("cases/simple/null.json");
     }
 }

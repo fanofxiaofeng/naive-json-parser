@@ -20,6 +20,7 @@ public interface Whitespace {
             return "";
         }
 
+        @ForDebug
         @Override
         public int size() {
             return 0;
