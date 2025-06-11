@@ -1,8 +1,10 @@
 package com.study.model;
 
-public interface Fraction {
+public sealed interface Fraction permits
+        Fraction.EmptyCase,
+        Fraction.NormalCase {
 
-    class EmptyCase implements Fraction {
+    final class EmptyCase implements Fraction {
         private static final EmptyCase instance = new EmptyCase();
 
         private EmptyCase() {

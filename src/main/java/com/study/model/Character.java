@@ -1,6 +1,8 @@
 package com.study.model;
 
-public interface Character {
+public sealed interface Character permits
+        Character.CaseOne,
+        Character.CaseTwo {
 
     record CaseOne(int codePoint) implements Character {
 

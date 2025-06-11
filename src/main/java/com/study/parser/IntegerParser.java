@@ -15,12 +15,12 @@ public class IntegerParser implements Parser<com.study.model.Integer> {
         verifyNotExhaustedYet(peekingIterator);
 
         int peek = peekingIterator.peek();
-        if (!qualified(peek)) {
+        if (!isInitialCodePointValid(peek)) {
             java.lang.String message = java.lang.String.format("Unexpected codePoint: %s", peek);
             throw new IllegalArgumentException(message);
         }
 
-        boolean isNegative = peek == '-';
+        boolean isNegative = (peek == '-');
         if (isNegative) {
             dropExpectedCodePoint(peekingIterator, '-');
         }
@@ -43,7 +43,7 @@ public class IntegerParser implements Parser<com.study.model.Integer> {
         throw new IllegalArgumentException("digit is not an instance of OneNine!");
     }
 
-    private boolean qualified(int codePoint) {
+    private boolean isInitialCodePointValid(int codePoint) {
         if (codePoint == '-') {
             return true;
         }

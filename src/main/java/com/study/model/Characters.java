@@ -2,9 +2,14 @@ package com.study.model;
 
 import com.study.convertor.CharactersConvertor;
 
-public interface Characters {
+public sealed interface Characters permits
+        Characters.CaseOne,
+        Characters.CaseTwo {
 
-    class CaseOne implements Characters {
+    /**
+     * Empty case
+     */
+    final class CaseOne implements Characters {
         private static final Characters.CaseOne instance = new Characters.CaseOne();
 
         private CaseOne() {

@@ -6,28 +6,16 @@ import org.apache.commons.collections4.iterators.PeekingIterator;
 public class CharactersParser implements Parser<com.study.model.Characters> {
     @Override
     public Characters parse(PeekingIterator<Integer> peekingIterator) {
-        // todo: probably wrong
         if (!peekingIterator.hasNext()) {
-            return Characters.CaseOne.getInstance();
+            throw new IllegalArgumentException("Expected more character(s), but the iterator is already exhausted!");
         }
 
         int peek = peekingIterator.peek();
 //        System.out.printf("next cp is: %s%n", StringUtils.fromCodePoint(peek));
-        if (qualified(peek)) {
-            CharacterParser characterParser = new CharacterParser();
-            return new Characters.CaseTwo(characterParser.parse(peekingIterator), parse(peekingIterator));
+        if (peek == '"') {
+            return Characters.CaseOne.getInstance();
         }
-
-        return Characters.CaseOne.getInstance();
-    }
-
-    private boolean qualified(int codePoint) {
-        if (codePoint == '\\') {
-            return true;
-        }
-        if (codePoint == '"') {
-            return false;
-        }
-        return codePoint >= 0x0020 && codePoint <= 0x10FFF;
+        com.study.model.Character character = new CharacterParser().parse(peekingIterator);
+        return new Characters.CaseTwo(character, parse(peekingIterator));
     }
 }

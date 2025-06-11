@@ -2,7 +2,10 @@ package com.study.model;
 
 import com.study.util.StringUtils;
 
-public interface Hex {
+public sealed interface Hex permits
+        Hex.DigitCase,
+        Hex.LetterCase {
+
     record DigitCase(Digit digit) implements Hex {
         @Override
         public java.lang.String toString() {

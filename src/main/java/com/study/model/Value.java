@@ -23,7 +23,7 @@ public sealed interface Value
 
         @Override
         public java.lang.String toString() {
-            return "true";
+            return TRUE;
         }
     }
 
@@ -39,7 +39,7 @@ public sealed interface Value
 
         @Override
         public java.lang.String toString() {
-            return "false";
+            return FALSE;
         }
     }
 
@@ -56,7 +56,11 @@ public sealed interface Value
 
         @Override
         public java.lang.String toString() {
-            return "null";
+            return NULL;
         }
     }
+
+    java.lang.String TRUE = "true";
+    java.lang.String FALSE = "false";
+    java.lang.String NULL = "null";
 }

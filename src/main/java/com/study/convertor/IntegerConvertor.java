@@ -1,6 +1,5 @@
 package com.study.convertor;
 
-
 import com.study.model.Digit;
 import com.study.model.Integer;
 import com.study.model.OneNine;
@@ -37,6 +36,7 @@ public class IntegerConvertor implements Convertor<Integer> {
                     digitsConvertor.convert(caseFour.digits())
             );
         }
-        throw new IllegalArgumentException();
+        String message = String.format("Unexpected type: [%s]", integer.getClass().getCanonicalName());
+        throw new IllegalArgumentException(message);
     }
 }

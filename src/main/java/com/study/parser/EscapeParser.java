@@ -10,8 +10,6 @@ import java.util.stream.IntStream;
 public class EscapeParser implements Parser<Escape> {
     @Override
     public Escape parse(PeekingIterator<Integer> peekingIterator) {
-//        dropExpectedCodePoint(peekingIterator, '\\');
-
         verifyNotExhaustedYet(peekingIterator);
         int peek = peekingIterator.peek();
         if (peek == 'u') {

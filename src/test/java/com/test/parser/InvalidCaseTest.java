@@ -14,6 +14,12 @@ public class InvalidCaseTest extends TestBase {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    public void testBadNullCase() {
+        String s = "NULL";
+        Json json = parse(s);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void testWithFile() throws IOException {
         testWithFile("cases/simple/invalid_case.json");
     }

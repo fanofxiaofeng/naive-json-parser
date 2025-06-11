@@ -5,13 +5,15 @@ import com.study.model.String;
 import org.apache.commons.collections4.iterators.PeekingIterator;
 
 public class StringParser implements Parser<com.study.model.String> {
+
+    private static final int quotationMark = '"';
+
     @Override
     public String parse(PeekingIterator<Integer> peekingIterator) {
-        dropExpectedCodePoint(peekingIterator, '"');
-        CharactersParser charactersParser = new CharactersParser();
-        Characters characters = charactersParser.parse(peekingIterator);
-        dropExpectedCodePoint(peekingIterator, '"');
+        dropExpectedCodePoint(peekingIterator, quotationMark);
+        Characters characters = new CharactersParser().parse(peekingIterator);
+        dropExpectedCodePoint(peekingIterator, quotationMark);
 
-        return new com.study.model.String('"', characters, '"');
+        return new com.study.model.String(quotationMark, characters, quotationMark);
     }
 }

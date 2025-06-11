@@ -2,7 +2,9 @@ package com.study.model;
 
 import com.study.util.StringUtils;
 
-public interface Escape {
+public sealed interface Escape permits
+        Escape.SpecialCase,
+        Escape.GeneralCase {
     enum SpecialCase implements Escape {
         QUOTATION_MARK('"'),
         REVERSE_SOLIDUS('\\'),

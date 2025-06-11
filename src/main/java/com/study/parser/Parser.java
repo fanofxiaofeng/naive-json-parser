@@ -26,7 +26,7 @@ public interface Parser<T> {
                             StringUtils.fromCodePoint(expectedCodePoint),
                             expectedCodePoint,
                             StringUtils.fromCodePoint(next),
-                            next
+                            "0x" + Integer.toHexString(next)
                     );
             throw new IllegalArgumentException(message);
         }

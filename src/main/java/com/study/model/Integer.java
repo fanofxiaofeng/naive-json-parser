@@ -1,7 +1,10 @@
 package com.study.model;
 
-
-public interface Integer {
+public sealed interface Integer permits
+        Integer.CaseOne,
+        Integer.CaseTwo,
+        Integer.CaseThree,
+        Integer.CaseFour {
 
     record CaseOne(Digit digit) implements Integer {
 

@@ -1,8 +1,10 @@
 package com.study.model;
 
-public interface Whitespace {
+public sealed interface Whitespace permits
+        Whitespace.EmptyCase,
+        Whitespace.NormalCase {
 
-    class EmptyCase implements Whitespace {
+    final class EmptyCase implements Whitespace {
 
         private static final EmptyCase instance = new EmptyCase();
 

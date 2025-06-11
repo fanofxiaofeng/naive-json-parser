@@ -1,11 +1,14 @@
 package com.study.model;
 
-public interface Exponent {
+public sealed interface Exponent permits
+        Exponent.EmptyCase,
+        Exponent.UppercaseECase,
+        Exponent.LowercaseECase {
 
     int UPPERCASE_SYMBOL = 'E';
     int LOWERCASE_SYMBOL = 'e';
 
-    class EmptyCase implements Exponent {
+    final class EmptyCase implements Exponent {
     }
 
     record UppercaseECase(Sign sign, Digits digits) implements Exponent {

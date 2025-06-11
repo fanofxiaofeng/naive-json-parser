@@ -1,8 +1,8 @@
 # naive-json-parser
-A naive parser for `json` string
+A naive parser for `JSON` string
 
 I referred to [Introducing JSON](https://www.json.org/json-en.html)
-and implemented a very simple `json` parser.
+and implemented a simple `JSON` parser.
 
 ## Usage
 
@@ -11,7 +11,7 @@ Step 1: Build a `jar` file with the following command
 mvn clean package
 ```
 
-Step 2: Use this `jar` file to parse and pretty print json string from standard input.
+Step 2: Use this `jar` file to parse and pretty print `JSON` string from standard input.
 An example is shown below.
 ```
 echo '  [   {"Message": "Hello, world", "Some special numbers": [4.2E1, 23E0,   3.14159265358979], "Today is Saturday" : true, "Needs to work": false, "Test for null": null}]' | \
@@ -37,8 +37,8 @@ The output is like this
 ## Code structure
 Let's take a look at the `main` method in `com.study.Main` class
 ```java
-    public static void main(String[] args) throws IOException {
-        try (InputStream inputStream = System.in) {
+public static void main(String[] args) throws IOException {
+    try (InputStream inputStream = System.in) {
         byte[] bytes = inputStream.readAllBytes();
         String raw = new String(bytes, StandardCharsets.UTF_8);
 
@@ -49,13 +49,27 @@ Let's take a look at the `main` method in `com.study.Main` class
         String result = presenterFacade.convertToString(json);
         System.out.println(result);
     }
+}
 ```
 
 There are 3 main steps.
-1. Read from stdin
+1. Read from `stdin`
 2. Parse to a `Json` instance
 3. Present this `Json` instance
 
 
+A `JSON` value can be any of the below items
+* object
+* array
+* string
+* number
+* "true"
+* "false"
+* "null"
 
-todo
+### Case 1: `null/false/true`
+For `null`, `false`, `true`, they are special literal items
+
+
+TODO
+* Use slf4j

@@ -1,43 +1,40 @@
 package com.test.parser;
 
-import com.study.model.Json;
-import org.apache.commons.lang3.RandomStringUtils;
+import com.study.model.Digits;
+import com.study.parser.DigitsParser;
+import com.test.parser.util.DigitsHandler;
+import com.test.parser.util.ParseResultBuilder;
+import com.test.parser.util.RandomDigitsGenerator;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.StringJoiner;
+import java.util.stream.IntStream;
+
 public class DigitsParserTest extends TestBase {
+
+    private final DigitsParser digitsParser = new DigitsParser();
+    private final DigitsHandler digitsHandler = new DigitsHandler();
+    private final ParseResultBuilder<Digits> parseResultBuilder = new ParseResultBuilder<>();
+
     @Test
-    public void testForOneDigitCase() {
-        for (int i = 0; i < 10; i++) {
-            String s = i + "";
-            Json json = parse(s);
-            String result = present(json);
-            Assert.assertEquals(s, result.trim());
-        }
+    public void testCaseOne() {
+        IntStream.range(0, 10).forEach(value -> {
+            Digits parseResult = parseResultBuilder.buildParseResult(digitsParser, value + "");
+            Assert.assertTrue(parseResult instanceof Digits.CaseOne);
+            Assert.assertEquals(value + "", ((Digits.CaseOne) parseResult).digit().toString());
+        });
     }
 
     @Test
-    public void testForTwoDigitsCase() {
-        for (int i = 10; i < 100; i++) {
-            String s = i + "";
-            Json json = parse(s);
-            String result = present(json);
-            Assert.assertEquals(s, result.trim());
-        }
-    }
-
-    @Test
-    public void testForGeneralCase() {
+    public void testCaseTwo() {
+        RandomDigitsGenerator generator = new RandomDigitsGenerator(20);
         for (int i = 0; i < 100; i++) {
-            String randomNumber = RandomStringUtils.randomNumeric(1, 100);
-            if (randomNumber.startsWith("0") && !randomNumber.equals("0")) {
-                continue;
-            }
-
-            Json json = parse(randomNumber);
-            String result = present(json);
-            Assert.assertEquals(randomNumber, result.trim());
-            System.out.printf("Test passed for number: [%s]%n", randomNumber);
+            String raw = generator.generate();
+            Digits parseResult = parseResultBuilder.buildParseResult(digitsParser, raw);
+            StringJoiner joiner = new StringJoiner("");
+            digitsHandler.fillJoiner(parseResult, joiner);
+            Assert.assertEquals(raw, joiner.toString());
         }
     }
 }

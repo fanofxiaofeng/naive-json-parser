@@ -1,7 +1,20 @@
 package com.study.model;
 
+import java.lang.String;
+
 public enum Sign {
-    ABSENT,
-    NEGATIVE,
-    POSITIVE,
+    ABSENT(""),
+    NEGATIVE("-"),
+    POSITIVE("+");
+
+    private final java.lang.String content;
+
+    Sign(java.lang.String content) {
+        this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return content;
+    }
 }

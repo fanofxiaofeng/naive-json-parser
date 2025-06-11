@@ -1,26 +1,61 @@
 package com.test.parser;
 
-import com.study.model.Json;
-import com.study.parser.JsonParser;
-import org.apache.commons.collections4.iterators.PeekingIterator;
+import com.study.model.Value;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.stream.Stream;
 
 public class SpecialValueCaseParserTest extends TestBase {
 
     @Test
-    public void test() {
-        for (String value : new String[]{"true", "false", "null"}) {
-            String s = String.format(" \t\n\r\r\n\n\t %s    \r\n\n\n\t\t  ", value);
-            PeekingIterator<Integer> peekingIterator = new PeekingIterator<>(s.codePoints().iterator());
-            Json json = new JsonParser().parse(peekingIterator);
+    public void testNullCase() {
+        validate("null", Value.CaseNull.class);
+    }
 
-            String result = present(json);
-            Assert.assertEquals(value, result.trim());
-            System.out.printf("Test for: case [%s] passed%n", value);
-        }
+    @Test
+    public void testInvalidNullCase() {
+        Stream.of(
+                "Null",
+                "NULL",
+                "nulll",
+                "nul"
+        ).forEach(badValue -> Assert.assertThrows(IllegalArgumentException.class, () -> validate(badValue, Value.CaseNull.class)));
+    }
+
+    @Test
+    public void testTrueCase() {
+        validate("true", Value.CaseTrue.class);
+    }
+
+    @Test
+    public void testInvalidTrueCase() {
+        Stream.of(
+                "True",
+                "TRUE",
+                "truee",
+                "truth",
+                "t",
+                "T"
+        ).forEach(badValue -> Assert.assertThrows(IllegalArgumentException.class, () -> validate(badValue, Value.CaseTrue.class)));
+    }
+
+    @Test
+    public void testFalseCase() {
+        validate("false", Value.CaseFalse.class);
+    }
+
+    @Test
+    public void testInvalidFalseCase() {
+        Stream.of(
+                "False",
+                "FALSE",
+                "falsee",
+                "falsy",
+                "f",
+                "F"
+        ).forEach(badValue -> Assert.assertThrows(IllegalArgumentException.class, () -> validate(badValue, Value.CaseTrue.class)));
     }
 
     @Test
