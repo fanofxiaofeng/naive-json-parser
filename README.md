@@ -59,17 +59,38 @@ There are 3 main steps.
 
 
 A `JSON` value can be any of the below items
-* object
-* array
-* string
-* number
-* "true"
-* "false"
-* "null"
+* _object_
+* _array_
+* _string_
+* _number_
+* _"true"_ (i.e. literal `true`)
+* _"false"_ (i.e. literal `false`)
+* _"null"_ (i.e. literal `null`)
 
 ### Case 1: `null/false/true`
 For `null`, `false`, `true`, they are special literal items
+They are parsed by below parsers respectively 
+1. [CaseNullParser](src/main/java/com/study/parser/CaseNullParser.java)
+2. [CaseFalseParser](src/main/java/com/study/parser/CaseFalseParser.java)
+3. [CaseTrueParser](src/main/java/com/study/parser/CaseTrueParser.java)
 
+### Case 2: `number`
+A `number` has below three parts
+1. `integer`
+2. `fraction`
+3. `exponent`
+
+`Number`s are parsed by [NumberParser](src/main/java/com/study/parser/NumberParser.java).
+
+### Case 3: `string`
+A `string` is composed by below three parts.
+1. A leading `"`
+2. `characters`
+3. A tailing `"`
+
+`String`s are parsed by [StringParser](src/main/java/com/study/parser/StringParser.java).
+
+**TO BE CONTINUED**
 
 TODO
 * Use slf4j
