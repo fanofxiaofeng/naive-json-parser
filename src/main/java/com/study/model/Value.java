@@ -1,5 +1,8 @@
 package com.study.model;
 
+import com.study.model.number.Number;
+import com.study.model.string.String;
+
 public sealed interface Value
         permits
         Object,

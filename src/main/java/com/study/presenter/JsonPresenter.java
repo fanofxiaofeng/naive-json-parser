@@ -14,6 +14,6 @@ public class JsonPresenter extends AbstractPresenter<Json> {
     @Override
     public void present(Json json) {
         elementPresenter.present(json.element());
-        resultHolder.println();
+//        resultHolder.println();
     }
 }

@@ -22,17 +22,18 @@ public class WhitespaceParserTest extends TestBase {
     @Test
     public void testNormalCase() {
         int[] candidates = new int[]{0x0020, 0x000A, 0x000D, 0x0009};
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             int len = 1 + random.nextInt(20);
             int[] components = new int[len];
             IntStream.range(0, len).forEach(index -> components[index] = candidates[random.nextInt(candidates.length)]);
             Whitespace parseResult = parseResultBuilder.buildParseResult(parser, new String(components, 0, components.length));
+            Whitespace remainingPart = parseResult;
             Assert.assertTrue(parseResult instanceof Whitespace.NormalCase);
             for (int j = 0; j < len; j++) {
-                Assert.assertEquals(components[j], ((Whitespace.NormalCase) parseResult).codePoint());
-                parseResult = ((Whitespace.NormalCase) parseResult).whitespace();
+                Assert.assertEquals(components[j], ((Whitespace.NormalCase) remainingPart).codePoint());
+                remainingPart = ((Whitespace.NormalCase) remainingPart).whitespace();
             }
-            Assert.assertTrue(parseResult instanceof Whitespace.EmptyCase);
+            Assert.assertTrue(remainingPart instanceof Whitespace.EmptyCase);
         }
     }
 }

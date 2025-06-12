@@ -1,6 +1,8 @@
 package com.study.model;
 
-public non-sealed interface Array extends Value {
+public sealed interface Array extends Value permits
+        Array.CaseOne,
+        Array.CaseTwo {
 
     int LEFT_BRACKET = '[';
     int RIGHT_BRACKET = ']';

@@ -1,7 +1,6 @@
 package com.study.convertor;
 
-import com.study.convertor.Convertor;
-import com.study.model.Sign;
+import com.study.model.number.Sign;
 
 public class SignConvertor implements Convertor<Sign> {
     @Override

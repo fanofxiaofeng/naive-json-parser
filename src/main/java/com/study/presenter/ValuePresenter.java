@@ -2,6 +2,8 @@ package com.study.presenter;
 
 import com.study.convertor.*;
 import com.study.model.Value;
+import com.study.model.number.Number;
+import com.study.model.string.String;
 import com.study.util.ResultHolder;
 
 public class ValuePresenter extends AbstractPresenter<Value> {
@@ -26,7 +28,7 @@ public class ValuePresenter extends AbstractPresenter<Value> {
             arrayPresenter.present(array);
             return;
         }
-        if (value instanceof com.study.model.String string) {
+        if (value instanceof String string) {
             StringConvertor stringConvertor = new StringConvertor();
             if (objectValue) {
                 resultHolder.print(stringConvertor.convert(string));
@@ -35,7 +37,7 @@ public class ValuePresenter extends AbstractPresenter<Value> {
             }
             return;
         }
-        if (value instanceof com.study.model.Number number) {
+        if (value instanceof Number number) {
             NumberConvertor numberConvertor = new NumberConvertor();
             if (objectValue) {
                 resultHolder.print(numberConvertor.convert(number));

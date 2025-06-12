@@ -52,9 +52,9 @@ public static void main(String[] args) throws IOException {
 }
 ```
 
-There are 3 main steps.
+There are 3 steps.
 1. Read from `stdin`
-2. Parse to a `Json` instance
+2. Parse as a `Json` instance
 3. Present this `Json` instance
 
 

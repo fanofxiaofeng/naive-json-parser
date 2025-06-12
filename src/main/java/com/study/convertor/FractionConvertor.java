@@ -1,6 +1,6 @@
 package com.study.convertor;
 
-import com.study.model.Fraction;
+import com.study.model.number.Fraction;
 import com.study.util.StringUtils;
 
 public class FractionConvertor implements Convertor<Fraction> {

@@ -1,6 +1,6 @@
 package com.study.convertor;
 
-import com.study.model.Exponent;
+import com.study.model.number.Exponent;
 import com.study.util.StringUtils;
 
 public class ExponentConvertor implements Convertor<Exponent> {

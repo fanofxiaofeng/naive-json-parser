@@ -1,6 +1,6 @@
 package com.study.convertor;
 
-import com.study.model.Escape;
+import com.study.model.string.Escape;
 import com.study.util.StringUtils;
 
 public class EscapeConvertor implements Convertor<Escape> {

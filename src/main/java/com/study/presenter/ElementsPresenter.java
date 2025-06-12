@@ -5,16 +5,10 @@ import com.study.util.ResultHolder;
 
 public class ElementsPresenter extends AbstractPresenter<Elements> {
 
-    private final boolean objectValue;
-
-    private final int indentLevel;
-
     private final ElementPresenter elementPresenter;
 
     public ElementsPresenter(ResultHolder resultHolder, boolean objectValue, int indentLevel) {
         super(resultHolder);
-        this.objectValue = objectValue;
-        this.indentLevel = indentLevel;
         this.elementPresenter = new ElementPresenter(resultHolder, objectValue, indentLevel);
     }
 

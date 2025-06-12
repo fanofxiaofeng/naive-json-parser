@@ -1,6 +1,6 @@
 package com.study.convertor;
 
-import com.study.model.Number;
+import com.study.model.number.Number;
 import com.study.util.StringUtils;
 
 public class NumberConvertor implements Convertor<Number> {

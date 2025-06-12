@@ -1,6 +1,6 @@
 package com.test.parser.util;
 
-import com.study.model.Digits;
+import com.study.model.number.Digits;
 
 import java.util.StringJoiner;
 

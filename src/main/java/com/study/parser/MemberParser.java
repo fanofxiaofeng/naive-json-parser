@@ -3,6 +3,8 @@ package com.study.parser;
 import com.study.model.Element;
 import com.study.model.Member;
 import com.study.model.Whitespace;
+import com.study.model.string.String;
+import com.study.parser.string.StringParser;
 import org.apache.commons.collections4.iterators.PeekingIterator;
 
 public class MemberParser implements Parser<Member> {
@@ -18,7 +20,7 @@ public class MemberParser implements Parser<Member> {
     }
 
     public Member parse(Whitespace ws1, PeekingIterator<Integer> peekingIterator) {
-        com.study.model.String string = stringParser.parse(peekingIterator);
+        String string = stringParser.parse(peekingIterator);
         Whitespace ws2 = whitespaceParser.parse(peekingIterator);
         dropExpectedCodePoint(peekingIterator, ':');
         Element element = elementParser.parse(peekingIterator);

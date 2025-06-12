@@ -1,6 +1,6 @@
 package com.study.convertor;
 
-import com.study.model.Characters;
+import com.study.model.string.Characters;
 import com.study.util.StringUtils;
 
 public class CharactersConvertor implements Convertor<Characters> {

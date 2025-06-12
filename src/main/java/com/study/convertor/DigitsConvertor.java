@@ -1,7 +1,7 @@
 package com.study.convertor;
 
-import com.study.model.Digit;
-import com.study.model.Digits;
+import com.study.model.number.Digit;
+import com.study.model.number.Digits;
 import com.study.util.StringUtils;
 
 public class DigitsConvertor implements Convertor<Digits> {

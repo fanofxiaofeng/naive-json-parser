@@ -34,10 +34,6 @@ public abstract class TestBase {
         return presenterFacade.convertToString(json);
     }
 
-    protected String removeWhitespace(String s) {
-        return s.replaceAll("[\t\r\n ]", "");
-    }
-
     protected String readContentAsString(String name) throws IOException {
         ClassLoader classLoader = this.getClass().getClassLoader();
         try (InputStream inputStream = classLoader.getResourceAsStream(name)) {
