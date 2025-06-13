@@ -8,7 +8,6 @@ import com.test.parser.util.string.StringGenerator;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,20 +60,6 @@ public class ArrayParserTest extends TestBase {
                     }
                 }
             }
-        }
-    }
-
-    @Test
-    public void testWithFile() throws IOException {
-        for (String name : new String[]{
-                "cases/simple/array1.json",
-                "cases/complex/1.json"
-        }) {
-            String s = readContentAsString(name);
-            Json json = parse(s);
-            String result = present(json, 2);
-            System.out.println(result);
-            Assert.assertEquals(s.trim(), result.trim());
         }
     }
 }

@@ -31,7 +31,13 @@ public class DigitsGenerator extends AbstractRelationBasedGenerator<Digits> {
         }
         if (type == Digits.CaseTwo.class) {
             StringJoiner joiner = new StringJoiner("");
-            int len = 1 + random.nextInt(lenBound);
+            if (lenBound < 2) {
+                throw new IllegalArgumentException("lenBound should be greater than or equal to 2");
+            }
+
+            // Allowed values for len variable: 2, 3, 4, ... lenBound
+            int len = random.nextInt(lenBound - 1) + 2;
+
             for (int i = 0; i < len; i++) {
                 joiner.add("" + random.nextInt(10));
             }

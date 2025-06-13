@@ -1,6 +1,11 @@
 # naive-json-parser
 A naive parser for `JSON` string
 
+Before diving into this project, let's think over several questions as follows
+1. Is `"true"` a valid `JSON` string? What about `" \r\n\t true"`, `3.14`, `"\u0000"`, ...?
+2. With `node.js`, `JSON.parse("123456789123456789123456789")` returns `1.2345678912345679e+26`, so does `JSON` format support arbitrary length integers?
+3. With `node.js`, both `JSON.parse("\\/")` and `JSON.parse("/")` run successfully, does `JSON` format support both `"\\/"` and `"/"`?
+
 I referred to [Introducing JSON](https://www.json.org/json-en.html)
 and implemented a simple `JSON` parser.
 
@@ -68,8 +73,8 @@ A `JSON` value can be any of the below items
 * _"null"_ (i.e. literal `null`)
 
 ### Case 1: `null/false/true`
-For `null`, `false`, `true`, they are special literal items
-They are parsed by below parsers respectively 
+For `null`, `false`, `true`, they are special literal items.
+They are parsed by the below parsers respectively 
 1. [CaseNullParser](src/main/java/com/study/parser/CaseNullParser.java)
 2. [CaseFalseParser](src/main/java/com/study/parser/CaseFalseParser.java)
 3. [CaseTrueParser](src/main/java/com/study/parser/CaseTrueParser.java)
@@ -80,7 +85,7 @@ A `number` has below three parts
 2. `fraction`
 3. `exponent`
 
-`Number`s are parsed by [NumberParser](src/main/java/com/study/parser/NumberParser.java).
+`Number` items are parsed by [NumberParser](src/main/java/com/study/parser/NumberParser.java).
 
 ### Case 3: `string`
 A `string` is composed by below three parts.
@@ -88,7 +93,7 @@ A `string` is composed by below three parts.
 2. `characters`
 3. A tailing `"`
 
-`String`s are parsed by [StringParser](src/main/java/com/study/parser/StringParser.java).
+`String` items are parsed by [StringParser](src/main/java/com/study/parser/StringParser.java).
 
 **TO BE CONTINUED**
 

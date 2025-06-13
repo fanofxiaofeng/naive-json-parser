@@ -4,7 +4,9 @@ import com.study.model.string.Character;
 import com.study.model.string.Escape;
 import com.study.parser.string.CharacterParser;
 import com.study.util.StringUtils;
+import com.test.For;
 import com.test.parser.util.ParseResultBuilder;
+import com.test.parser.util.TestHelper;
 import com.test.parser.util.string.CharacterGenerator;
 import com.test.parser.util.string.HexGenerator;
 import org.junit.Assert;
@@ -14,23 +16,28 @@ import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.IntStream;
 
+@For(Character.class)
 public class CharacterParserTest {
 
     private final CharacterParser parser = new CharacterParser();
     private final ParseResultBuilder<Character> parseResultBuilder = new ParseResultBuilder<>();
+    private final TestHelper<Character> testHelper = new TestHelper<>();
 
+    @For(Character.CaseOne.class)
     @Test
     public void testCaseOne() {
         CharacterGenerator characterGenerator = new CharacterGenerator();
 
-        for (int i = 0; i < 100; i++) {
-            String generatedResult = characterGenerator.generate(Character.CaseOne.class);
+        Class<Character.CaseOne> type = Character.CaseOne.class;
+
+        IntStream.range(0, 100).mapToObj(i -> characterGenerator.generate(type)).forEach(generatedResult -> {
             Character parseResult = parseResultBuilder.buildParseResult(parser, generatedResult);
-            Assert.assertTrue(parseResult instanceof Character.CaseOne);
-            Assert.assertEquals(generatedResult, StringUtils.fromCodePoint(((Character.CaseOne) parseResult).codePoint()));
-        }
+            Character.CaseOne caseOne = testHelper.castTo(parseResult, type);
+            Assert.assertEquals(generatedResult, StringUtils.fromCodePoint(caseOne.codePoint()));
+        });
     }
 
+    @For(Character.CaseTwo.class)
     @Test
     public void testCaseTwo() {
         Escape.SpecialCase[] candidates = Escape.SpecialCase.values();

@@ -2,82 +2,77 @@ package com.test.parser.number;
 
 import com.study.model.number.Integer;
 import com.study.model.number.Digit;
-import com.study.model.number.OneNine;
-import com.study.model.number.Zero;
 import com.study.parser.number.IntegerParser;
+import com.test.For;
 import com.test.parser.util.DigitsHandler;
 import com.test.parser.util.ParseResultBuilder;
-import com.test.parser.util.RelationBasedGenerator;
+import com.test.parser.util.TestHelper;
 import com.test.parser.util.number.IntegerGenerator;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.lang.String;
-import java.util.StringJoiner;
 
+@For(Integer.class)
 public class IntegerParserTest {
 
-    private final RelationBasedGenerator<Integer> integerGenerator = new IntegerGenerator();
-
+    private final IntegerGenerator integerGenerator = new IntegerGenerator();
     private final IntegerParser integerParser = new IntegerParser();
-
     private final ParseResultBuilder<Integer> parseResultBuilder = new ParseResultBuilder<>();
-
     private final DigitsHandler digitsHandler = new DigitsHandler();
+    private final TestHelper<Integer> testHelper = new TestHelper<>();
 
+    @For(value = Integer.CaseOne.class, desc = "For CaseOne, i.e. 0, 1, 2, ... 9")
     @Test
     public void testCaseOne() {
-        String generatedResult = integerGenerator.generate(Integer.CaseOne.class);
+        Class<Integer.CaseOne> type = Integer.CaseOne.class;
+
+        String generatedResult = integerGenerator.generate(type);
         Integer parseResult = parseResultBuilder.buildParseResult(integerParser, generatedResult);
 
-        Assert.assertTrue(parseResult instanceof Integer.CaseOne);
-
-        Digit digit = ((Integer.CaseOne) parseResult).digit();
-        Assert.assertTrue(digit instanceof Zero || digit instanceof OneNine);
+        Integer.CaseOne caseOne = testHelper.castTo(parseResult, type);
+        Digit digit = caseOne.digit();
         Assert.assertEquals(generatedResult, digit.toString());
     }
 
+    @For(Integer.CaseTwo.class)
     @Test
     public void testCaseTwo() {
-        String generatedResult = integerGenerator.generate(Integer.CaseTwo.class);
+        Class<Integer.CaseTwo> type = Integer.CaseTwo.class;
+
+        String generatedResult = integerGenerator.generate(type);
         Integer parseResult = parseResultBuilder.buildParseResult(integerParser, generatedResult);
 
-        Assert.assertTrue(parseResult instanceof Integer.CaseTwo);
-
-        StringJoiner joiner = new StringJoiner("");
-
-        Digit digit = ((Integer.CaseTwo) parseResult).oneNine();
-        joiner.add(digit.toString());
-        digitsHandler.fillJoiner(((Integer.CaseTwo) parseResult).digits(), joiner);
-
-        Assert.assertEquals(generatedResult, joiner.toString());
+        Integer.CaseTwo caseTwo = testHelper.castTo(parseResult, type);
+        Digit digit = caseTwo.oneNine();
+        String joinedResult = digitsHandler.buildJoinedResult(caseTwo.digits(), digit);
+        Assert.assertEquals(generatedResult, joinedResult);
     }
 
+    @For(Integer.CaseThree.class)
     @Test
     public void testCaseThree() {
-        String generatedResult = integerGenerator.generate(Integer.CaseThree.class);
+        Class<Integer.CaseThree> type = Integer.CaseThree.class;
+
+        String generatedResult = integerGenerator.generate(type);
         Integer parseResult = parseResultBuilder.buildParseResult(integerParser, generatedResult);
 
-        Assert.assertTrue(parseResult instanceof Integer.CaseThree);
-
-        Digit digit = ((Integer.CaseThree) parseResult).digit();
-        Assert.assertTrue(digit instanceof Zero || digit instanceof OneNine);
+        Integer.CaseThree caseThree = testHelper.castTo(parseResult, type);
+        Digit digit = caseThree.digit();
         Assert.assertEquals(generatedResult, "-" + digit);
     }
 
+    @For(Integer.CaseFour.class)
     @Test
     public void testCaseFour() {
-        String generatedResult = integerGenerator.generate(Integer.CaseFour.class);
+        Class<Integer.CaseFour> type = Integer.CaseFour.class;
+
+        String generatedResult = integerGenerator.generate(type);
         Integer parseResult = parseResultBuilder.buildParseResult(integerParser, generatedResult);
 
-        Assert.assertTrue(parseResult instanceof Integer.CaseFour);
-
-        StringJoiner joiner = new StringJoiner("", "-", "");
-
-        Digit digit = ((Integer.CaseFour) parseResult).oneNine();
-        joiner.add(digit.toString());
-        digitsHandler.fillJoiner(((Integer.CaseFour) parseResult).digits(), joiner);
-
-        Assert.assertEquals(generatedResult, joiner.toString());
+        Integer.CaseFour caseFour = testHelper.castTo(parseResult, type);
+        Digit digit = caseFour.oneNine();
+        String joinedResult = digitsHandler.buildJoinedResult(caseFour.digits(), "-", digit);
+        Assert.assertEquals(generatedResult, joinedResult);
     }
 }

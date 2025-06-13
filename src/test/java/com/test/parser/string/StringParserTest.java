@@ -1,6 +1,8 @@
 package com.test.parser.string;
 
 import com.study.model.Json;
+import com.study.model.string.Escape;
+import com.test.For;
 import com.test.parser.TestBase;
 import com.test.parser.util.string.CharacterGenerator;
 import org.apache.commons.lang3.StringUtils;
@@ -13,10 +15,12 @@ import java.util.StringJoiner;
 import java.util.function.IntConsumer;
 import java.util.stream.Stream;
 
+@For({com.study.model.string.String.class, com.study.model.string.Character.class})
 public class StringParserTest extends TestBase {
 
     private final CharacterGenerator characterGenerator = new CharacterGenerator();
 
+    @For(value = Escape.SpecialCase.class, desc = "For com.study.model.string.Escape.SpecialCase.QUOTATION_MARK, i.e '\"'")
     @Test
     public void testQuotationMark() {
         Stream.of(

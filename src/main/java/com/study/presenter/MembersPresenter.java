@@ -4,13 +4,11 @@ import com.study.model.Members;
 import com.study.util.ResultHolder;
 
 public class MembersPresenter extends AbstractPresenter<Members> {
-    private final int indentLevel;
 
     private final MemberPresenter memberPresenter;
 
     public MembersPresenter(ResultHolder resultHolder, int indentLevel) {
         super(resultHolder);
-        this.indentLevel = indentLevel;
         this.memberPresenter = new MemberPresenter(resultHolder, indentLevel);
     }
 

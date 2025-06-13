@@ -9,6 +9,10 @@ public class ResultHolder {
         this.indentWidthForEachLevel = indentWidthForEachLevel;
     }
 
+    public ResultHolder() {
+        this(4);
+    }
+
     public void print(String content) {
         stringBuilder.append(content);
     }

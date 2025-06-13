@@ -2,10 +2,18 @@ package com.study.model.number;
 
 import java.lang.String;
 
+/**
+ * Format:
+ * <ul>
+ *     <li><code>""</code></li>
+ *     <li><code>'+'</code></li>
+ *     <li><code>'-'</code></li>
+ * </ul>
+ */
 public enum Sign {
     ABSENT(""),
-    NEGATIVE("-"),
-    POSITIVE("+");
+    POSITIVE("+"),
+    NEGATIVE("-");
 
     private final java.lang.String content;
 

@@ -2,6 +2,9 @@ package com.study.model.number;
 
 import com.study.util.StringUtils;
 
+/**
+ * Format: <code>'1' . '9'</code>
+ */
 public enum OneNine implements Digit {
     ONE('1'),
     TWO('2'),
