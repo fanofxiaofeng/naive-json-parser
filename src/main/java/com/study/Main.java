@@ -3,15 +3,18 @@ package com.study;
 import com.study.model.Json;
 import com.study.parser.JsonParser;
 import com.study.presenter.PresenterFacade;
+import com.study.util.SimpleOptionHandler;
 import org.apache.commons.collections4.iterators.PeekingIterator;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class Main {
+
     public static void main(String[] args) throws IOException {
-        try (InputStream inputStream = System.in) {
+        SimpleOptionHandler optionHandler = new SimpleOptionHandler(args);
+
+        try (InputStream inputStream = optionHandler.isFileSpecified() ? new FileInputStream(optionHandler.getFileName()) : System.in) {
             byte[] bytes = inputStream.readAllBytes();
             String raw = new String(bytes, StandardCharsets.UTF_8);
 

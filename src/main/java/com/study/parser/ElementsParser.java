@@ -14,7 +14,7 @@ public class ElementsParser implements Parser<Elements> {
         return parse(element, peekingIterator);
     }
 
-    public Elements parse(Element element, PeekingIterator<Integer> peekingIterator) {
+    private Elements parse(Element element, PeekingIterator<Integer> peekingIterator) {
         if (peekingIterator.hasNext() && peekingIterator.peek() == COMMA) {
             dropExpectedCodePoint(peekingIterator, COMMA);
             return new Elements.CaseTwo(element, COMMA, parse(peekingIterator));
